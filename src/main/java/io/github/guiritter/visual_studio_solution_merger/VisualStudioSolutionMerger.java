@@ -61,41 +61,71 @@ public class VisualStudioSolutionMerger {
 		var sourceList = VisualStudioSolutionMerger.parse(sourceArea.getText());
 		var targetList = VisualStudioSolutionMerger.parse(targetArea.getText());
 
-		int sourceI;
-		int targetI;
+		int thisI;
+		int otherI;
 
-		Project sourceProject = null;
-		Project targetProject = null;
+		Project thisProject = null;
+		Project otherProject = null;
 
-		int targetFound;
+		List<Project> thisList = sourceList;
+		List<Project> otherList = targetList;
+		List<Project> tempList;
 
-		for (sourceI = 0; sourceI < sourceList.size(); sourceI++) {
+		int otherFound;
 
-			sourceProject = sourceList.get(sourceI);
+		// boolean thisDone = false;
+		boolean otherDone = false;
 
-			targetFound = INVALID_INDEX;
+		for (thisI = 0; thisI < thisList.size(); thisI++) {
 
-			for (targetI = 0; targetI < targetList.size(); targetI++) {
+			thisProject = thisList.get(thisI);
 
-				targetProject = targetList.get(targetI);
+			otherFound = INVALID_INDEX;
 
-				if (Objects.equals(sourceProject, targetProject)) {
+			for (otherI = 0; otherI < otherList.size(); otherI++) {
+
+				otherProject = otherList.get(otherI);
+
+				if (Objects.equals(thisProject, otherProject)) {
 					
-					targetFound = targetI;
+					otherFound = otherI;
 					break;
 				}
 			}
 
-			if (targetFound > INVALID_INDEX) {
+			if (otherFound > INVALID_INDEX) {
 
-				if (targetFound == sourceI) {
+				if (otherFound == thisI) {
+					if ((thisI + 1) == thisList.size()) {
+						// thisDone = true;
+						if (otherDone) {
+							break;
+						} else {
+							// thisDone = false;
+							otherDone = true;
+							tempList = thisList;
+							thisList = otherList;
+							otherList = tempList;
+							thisI = INVALID_INDEX;
+							continue;
+						}
+					}
 					continue;
 				} else {
-					targetList.remove(targetFound);
-					targetList.add(sourceI, targetProject);
-					sourceI = -1;
+					otherList.remove(otherFound);
+					otherList.add(thisI, otherProject);
+					thisI = INVALID_INDEX;
 					continue;
 				}
+			} else {
+				otherList.add(thisI, new Project(thisProject));
+				// thisDone = false;
+				otherDone = false;
+				tempList = thisList;
+				thisList = otherList;
+				otherList = tempList;
+				thisI = INVALID_INDEX;
+				continue;
 			}
 		}
 
@@ -103,9 +133,9 @@ public class VisualStudioSolutionMerger {
 
 		var resultBuilder = new StringBuilder();
 
-		for (sourceI = 0; sourceI < sourceList.size(); sourceI++) {
+		for (thisI = 0; thisI < sourceList.size(); thisI++) {
 
-			resultBuilder.append(sourceList.get(sourceI)).append("\n");
+			resultBuilder.append(sourceList.get(thisI)).append("\n");
 		}
 
 		resultArea.setText(resultBuilder.toString());

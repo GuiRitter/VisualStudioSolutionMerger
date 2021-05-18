@@ -21,6 +21,10 @@ public final class Project {
 		this.line3 = line3;
 	}
 
+	public Project(Project project) {
+		this(project.line0, project.line1, project.line2, project.line3);
+	}
+
 	@Override
 	public String toString() {
 		return "        " + labelA + index + " = " + line0 + "\n"
