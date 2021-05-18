@@ -1,0 +1,24 @@
+source
+
+        LabelA1 = "alpha"
+        LabelB1 = "alpha"
+        LabelC1 = "alpha"
+        LabelD1 = "alpha"
+        LabelA2 = "bravo"
+        LabelB2 = "bravo"
+        LabelC2 = "bravo"
+        LabelD2 = "bravo"
+
+target
+
+        LabelA1 = "bravo"
+        LabelB1 = "bravo"
+        LabelC1 = "bravo"
+        LabelD1 = "bravo"
+        LabelA2 = "alpha"
+        LabelB2 = "alpha"
+        LabelC2 = "alpha"
+        LabelD2 = "alpha"
+
+A       C
+C       A

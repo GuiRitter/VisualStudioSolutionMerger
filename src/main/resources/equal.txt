@@ -1,0 +1,13 @@
+source
+
+        LabelA1 = "alpha"
+        LabelB1 = "alpha"
+        LabelC1 = "alpha"
+        LabelD1 = "alpha"
+
+target
+
+        LabelA1 = "alpha"
+        LabelB1 = "alpha"
+        LabelC1 = "alpha"
+        LabelD1 = "alpha"
