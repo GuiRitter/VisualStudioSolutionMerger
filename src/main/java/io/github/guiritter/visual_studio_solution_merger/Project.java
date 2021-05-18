@@ -12,6 +12,8 @@ public final class Project {
 	public final String line2;
 	public final String line3;
 
+	public int index = VisualStudioSolutionMerger.INVALID_INDEX;
+
 	public Project(String line0, String line1, String line2, String line3) {
 		this.line0 = line0;
 		this.line1 = line1;
@@ -21,10 +23,10 @@ public final class Project {
 
 	@Override
 	public String toString() {
-		return "        " + labelA + " = " + line0 + "\n"
-			+ "        " + labelB + " = " + line1 + "\n"
-			+ "        " + labelC + " = " + line2 + "\n"
-			+ "        " + labelD + " = " + line3 + "\n";
+		return "        " + labelA + index + " = " + line0 + "\n"
+			+ "        " + labelB + index + " = " + line1 + "\n"
+			+ "        " + labelC + index + " = " + line2 + "\n"
+			+ "        " + labelD + index + " = " + line3;
 	}
 
 	@Override

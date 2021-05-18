@@ -18,6 +18,8 @@ public class VisualStudioSolutionMerger {
 	private static JTextArea targetArea;
 	private static JTextArea resultArea;
 
+	public static final int INVALID_INDEX = -1;
+
 	static {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		JDialog.setDefaultLookAndFeelDecorated(true);
@@ -47,10 +49,17 @@ public class VisualStudioSolutionMerger {
 		return list;
 	}
 
+	private static final void recalculateIndex(List<Project> projectList) {
+		int i;
+		for (i = 0; i < projectList.size(); i++) {
+			projectList.get(i).index = i + 1;
+		}
+	}
+
 	private static final void merge(ActionEvent event) {
 
-		var sourceList = parse(sourceArea.getText());
-		var targetList = parse(targetArea.getText());
+		var sourceList = VisualStudioSolutionMerger.parse(sourceArea.getText());
+		var targetList = VisualStudioSolutionMerger.parse(targetArea.getText());
 
 		int sourceI;
 		int targetI;
@@ -58,9 +67,13 @@ public class VisualStudioSolutionMerger {
 		Project sourceProject = null;
 		Project targetProject = null;
 
+		int targetFound;
+
 		for (sourceI = 0; sourceI < sourceList.size(); sourceI++) {
 
 			sourceProject = sourceList.get(sourceI);
+
+			targetFound = INVALID_INDEX;
 
 			for (targetI = 0; targetI < targetList.size(); targetI++) {
 
@@ -68,12 +81,25 @@ public class VisualStudioSolutionMerger {
 
 				if (Objects.equals(sourceProject, targetProject)) {
 					
-					if (sourceI == targetI) {
-						break;
-					}
+					targetFound = targetI;
+					break;
+				}
+			}
+
+			if (targetFound > INVALID_INDEX) {
+
+				if (targetFound == sourceI) {
+					continue;
+				} else {
+					targetList.remove(targetFound);
+					targetList.add(sourceI, targetProject);
+					sourceI = -1;
+					continue;
 				}
 			}
 		}
+
+		VisualStudioSolutionMerger.recalculateIndex(sourceList);
 
 		var resultBuilder = new StringBuilder();
 
