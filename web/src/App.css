@@ -40,9 +40,15 @@ textarea {
 	margin: 0.5em 1em 0.5em 0.5em;/* top | right | bottom | left */
 }
 
-p {
-	grid-area: 4 / 1 / 5 / 7;/*row-start / column-start / row-end / and column-end*/
-	margin: 0.5em 1em 1em 1em;/* top | right | bottom | left */
+.number_of_projects {
+	grid-area: 4 / 1 / 5 / 4;/*row-start / column-start / row-end / and column-end*/
+	margin: 0.5em 0em 1em 1em;/* top | right | bottom | left */
+	text-align: left;
+}
+
+.by {
+	grid-area: 4 / 4 / 5 / 7;/*row-start / column-start / row-end / and column-end*/
+	margin: 0.5em 1em 1em 0em;/* top | right | bottom | left */
 	text-align: right;
 }
 

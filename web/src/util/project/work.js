@@ -27,7 +27,7 @@ let diff = (leftInput, rightInput) => {
 	return result;
 };
 
-let merge = (leftInput, rightInput) => {
+let merge = (leftInput, rightInput, numberOfProjectsSetter) => {
 	let leftList = parse(leftInput);
 	let rightList = parse(rightInput);
 
@@ -97,7 +97,7 @@ let merge = (leftInput, rightInput) => {
 		}
 	}
 
-	return exportToString(thisList);
+	return exportToString(thisList, numberOfProjectsSetter);
 };
 
 export {

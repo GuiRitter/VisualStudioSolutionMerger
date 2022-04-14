@@ -1,6 +1,10 @@
 import { projectEquals, projectToString } from '../project';
 
-let exportToString = list => list.reduce((previousString, currentProject, index) => previousString + projectToString(currentProject, index + 1), '');
+let exportToString = (list, numberOfProjectsSetter) => list.reduce((previousString, currentProject, index) => {
+	let indexIncremented = index + 1;
+	numberOfProjectsSetter(indexIncremented + 1);
+	return previousString + projectToString(currentProject, indexIncremented);
+}, '');
 
 let parse = input => removeProjectDuplicates(Object.values(input.split('\n').reduce((previousObject, currentLine) => {
 	currentLine = currentLine.trim();

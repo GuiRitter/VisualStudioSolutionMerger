@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { merge } from '../../../../../util/project/work';
 
+// TODO test function being passed as an argument
+
 test('equal', () => {
 	expect(merge(`        LabelA1 = "alpha"
     LabelB1 = "alpha"
@@ -8,7 +10,7 @@ test('equal', () => {
     LabelD1 = "alpha"`, `        LabelA1 = "alpha"
     LabelB1 = "alpha"
     LabelC1 = "alpha"
-    LabelD1 = "alpha"`)).toStrictEqual(`\t\tLabelA1 = "alpha"
+    LabelD1 = "alpha"`, () => {})).toStrictEqual(`\t\tLabelA1 = "alpha"
 \t\tLabelB1 = "alpha"
 \t\tLabelC1 = "alpha"
 \t\tLabelD1 = "alpha"
@@ -30,7 +32,7 @@ test('exists after', () => {
     LabelA2 = "alpha"
     LabelB2 = "alpha"
     LabelC2 = "alpha"
-    LabelD2 = "alpha"`)).toStrictEqual(`\t\tLabelA1 = "alpha"
+    LabelD2 = "alpha"`, () => {})).toStrictEqual(`\t\tLabelA1 = "alpha"
 \t\tLabelB1 = "alpha"
 \t\tLabelC1 = "alpha"
 \t\tLabelD1 = "alpha"
@@ -88,7 +90,7 @@ test('all', () => {
     LabelA6 = "2"
     LabelB6 = "2"
     LabelC6 = "2"
-    LabelD6 = "2"`)).toStrictEqual(`\t\tLabelA1 = "2"
+    LabelD6 = "2"`, () => {})).toStrictEqual(`\t\tLabelA1 = "2"
 \t\tLabelB1 = "2"
 \t\tLabelC1 = "2"
 \t\tLabelD1 = "2"
@@ -642,7 +644,7 @@ test('real life scenario, extra item on the left, other items scrambled', () => 
 \t\tSccProjectUniqueName64 = Source\\\\Service\\\\Task.TransactionAR\\\\Task.TransactionAR.csproj
 \t\tSccProjectTopLevelParentUniqueName64 = Company.Software.Section.sln
 \t\tSccProjectName64 = Source/Service/Task.TransactionAR
-\t\tSccLocalPath64 = Source\\\\Service\\\\Task.TransactionAR`)).toStrictEqual(`\t\tSccProjectUniqueName1 = Source\\\\DB\\\\Company.Software.Section.DB.csproj
+\t\tSccLocalPath64 = Source\\\\Service\\\\Task.TransactionAR`, () => {})).toStrictEqual(`\t\tSccProjectUniqueName1 = Source\\\\DB\\\\Company.Software.Section.DB.csproj
 \t\tSccProjectTopLevelParentUniqueName1 = Company.Software.Section.sln
 \t\tSccProjectName1 = Source/DB
 \t\tSccLocalPath1 = Source\\\\DB
