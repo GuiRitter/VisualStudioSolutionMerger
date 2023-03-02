@@ -37,7 +37,7 @@ function App(props) {
 		output.value = work.merge(leftInput.value, rightInput.value);
 	}
 
-	return <><textarea
+	return <><h1>Visual Studio Solution Merger</h1><textarea
 		className='left' id='left'
 	/><textarea
 		className='output' id='output'
@@ -47,7 +47,7 @@ function App(props) {
 		className='diff' onClick={() => diff()} type='button' value='diff'
 	/><input
 		className='merge' onClick={() => merge()} type='button' value='merge'
-	/></>;
+	/><p>by Guilherme Alan Ritter</p></>;
 }
 
 export default App;
